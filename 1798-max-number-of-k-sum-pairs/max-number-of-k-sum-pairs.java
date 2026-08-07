@@ -1,8 +1,11 @@
+import java.util.HashMap;
+
 class Solution {
     public int maxOperations(int[] nums, int k) {
 
         HashMap<Integer, Integer> map = new HashMap<>();
 
+       
         for (int num : nums) {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
@@ -11,27 +14,37 @@ class Solution {
 
         for (int num : nums) {
 
-          
-            if (map.getOrDefault(num, 0) == 0)
+            if (!map.containsKey(num))
                 continue;
 
             int target = k - num;
 
-            if (map.getOrDefault(target, 0) == 0)
+         
+            if (!map.containsKey(target))
                 continue;
 
-            
-            if (num == target && map.get(num) < 2)
-                continue;
+            if (num == target) {
 
-            map.put(num, map.get(num) - 1);
-            if (map.get(num) == 0)
-                map.remove(num);
+              
+                if (map.get(num) < 2)
+                    continue;
 
-           
-            map.put(target, map.get(target) - 1);
-            if (map.get(target) == 0)
-                map.remove(target);
+                map.put(num, map.get(num) - 2);
+
+                if (map.get(num) == 0)
+                    map.remove(num);
+
+            } else {
+
+              
+                map.put(num, map.get(num) - 1);
+                if (map.get(num) == 0)
+                    map.remove(num);
+
+                map.put(target, map.get(target) - 1);
+                if (map.containsKey(target) && map.get(target) == 0)
+                    map.remove(target);
+            }
 
             count++;
         }
