@@ -20,7 +20,7 @@ class Solution {
 
             l[i] = temp;
 
-            // Number of nodes in this part
+            
             int partSize = ans;
 
             if (rem > 0) {
@@ -28,16 +28,16 @@ class Solution {
                 rem--;
             }
 
-            // Move to the last node of this part
+          
             for (int j = 1; j < partSize; j++) {
                 temp = temp.next;
             }
 
-            // Save next part
+           
             if (temp != null) {
                 ListNode next = temp.next;
 
-                // Break current part
+               
                 temp.next = null;
 
                 temp = next;
